@@ -6,47 +6,41 @@ Use this reference when the user requests a psychoanalytic, psychodynamic, or de
 
 1. **Establish Material & Goal:**
    - Clarify whether the material is a dream, creative writing, cultural artifact/film, or personal reflection.
-   - Confirm the user's interpretive goal (e.g., thematic exploration, creative brainstorming, emotional processing).
+   - Confirm the user's interpretive goal (thematic exploration, creative brainstorming, or personal sense-making).
 2. **Distinguish Manifest from Latent:**
-   - *Manifest Content:* The literal narrative, surface dialogue, and observable plot/actions.
-   - *Latent Inquiry:* The underlying tensions, unstated desires, anxieties, and defense patterns suggested by the material.
+   - *Manifest Content:* The literal narrative, surface imagery, dialogue, and observable plot/actions.
+   - *Latent Inquiry:* The underlying tensions, ambivalent desires, anxieties, and defense patterns suggested by the structure of the material.
 3. **Track Dream-Work Processes (When Reading Dreams):**
-   - *Condensation:* Where does one image seem to combine multiple feelings, persons, or concerns?
-   - *Displacement:* Where is intense emotion attached to an seemingly insignificant detail?
-   - *User Associations Over Dictionaries:* Never use fixed symbol encyclopedias (e.g., "a snake always means X"). Ask what the image evokes or reminds the user of in their personal life and cultural context.
-4. **Identify Defense & Ambivalence:**
-   - Note contradictions, hesitation, sudden tonal shifts, over-emphasis (reaction formation), or emotional flattening (isolation of affect).
-5. **Frame Multiple Hypotheses:**
-   - Offer 1–2 psychodynamic perspectives alongside a practical, situational, or cultural alternative.
+   - *Condensation:* Where does a single figure or image fuse multiple concerns, memories, or relationships?
+   - *Displacement:* Where is intense affect attached to a seemingly minor detail—or strangely absent from a major one?
+   - *User Associations Over Symbol Dictionaries:* Never rely on fixed symbol encyclopedias (*"a snake always means X"*). Ask what the image evokes in the user's own life and cultural context.
+4. **Notice Defense & Ambivalence Gently:**
+   - Attend to sharp contrasts, sudden tonal shifts, emphatic negations, or affective flattening as possible markers of conflict rather than verdicts.
+5. **Pair With Non-Psychodynamic Alternatives:**
+   - Offer 1–2 psychodynamic perspectives alongside a situational, cognitive, craft/genre, or cultural reading.
 6. **Invite Calibration:**
-   - Conclude with an open-ended reflection prompt allowing the user to validate, refine, or discard the reading.
+   - Close with a single open-ended question allowing the user to revise, test, or discard the hypothesis.
 
 ## 2. Reading Creative & Cultural Works
-- When analyzing fictional characters, myths, or films, treat the work as a symbolic structure.
-- Examine how narrative arcs enact psychological conflicts (e.g., the struggle for autonomy, the encounter with the Jungian Shadow, the Lacanian destabilization of the ego).
-- Maintain clear boundaries: do not diagnose historical authors or fictional characters with psychiatric disorders.
+
+- Treat fictional characters, myths, and films as symbolic and structural compositions rather than clinical patients.
+- Trace how formal choices (pacing, perspective, repetition, framing) enact conflict—such as autonomy vs. dependency, encounter with the Jungian Shadow, or Lacanian tension between Imaginary wholeness and Symbolic law.
+- Do not apply DSM/psychiatric diagnoses to historical authors or fictional figures.
 
 ## 3. Calibrated Interpretive Language
 
 | Avoid (Dogmatic / "Wild") | Prefer (Hermeneutic / Tentative) |
 | :--- | :--- |
-| "This dream proves that you secretly resent your father." | "One possible reading of this conflict is that it mirrors tensions around authority or autonomy." |
-| "Your reaction shows you are in denial." | "There seems to be an ambivalence here between wanting connection and fearing vulnerability." |
-| "Water in dreams always symbolizes the unconscious mother." | "In many cultural traditions water represents the unknown, but what personal memories or feelings does this lake bring up for you?" |
+| "This dream proves that you secretly resent your father." | "One reading of this scene is that it stages a tension around authority and autonomy." |
+| "Your reaction shows you are in denial." | "There seems to be a pull in two directions here—wanting closeness while guarding against exposure." |
+| "Water in dreams always symbolizes the unconscious mother." | "Water often carries associations with transition or the unknown, though what personal memory or mood does this lake evoke for you?" |
 
-## 4. Response Shape
+## 4. Humanistic Response Template
 
-```
-### 1. Key Manifest Observations
-Brief summary of the specific images, words, contrasts, or narrative dynamics noted.
+Follow the 5-part canonical structure from `SKILL.md`:
 
-### 2. Psychodynamic Perspectives
-- **Perspective A:** (e.g., Freudian conflict, Object Relations splitting, or Winnicottian holding).
-- **Perspective B / Alternative:** (e.g., Jungian amplification, or a practical situational view).
-
-### 3. Interpretive Limits
-Clear acknowledgment of what cannot be determined from this text or without the user's personal context.
-
-### 4. Exploratory Prompt
-A single, open-ended question inviting the user to explore what resonates or where the interpretation misses.
-```
+1. **Manifest Observations:** Specific images, phrasing, contrasts, or narrative turns that stand out.
+2. **Psychodynamic Hypotheses:** 1–2 tentative readings anchored in named concepts (`references/theoretical-traditions.md`).
+3. **Alternative Framings:** Situational, cognitive, cultural, or literary-craft explanations.
+4. **Interpretive Limits:** What cannot be known from the text alone without the user's lived associations.
+5. **Exploratory Question:** One open, non-leading prompt inviting the user to judge what fits or misses.

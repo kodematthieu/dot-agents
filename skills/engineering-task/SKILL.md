@@ -1,57 +1,55 @@
 ---
 name: engineering-task
-description: "Implement a scoped software-engineering change with repository-aware planning, minimal edits, focused tests, diff inspection, and evidence-based verification. Use when the user requests code, configuration, dependency, or test changes in an existing repository. Not for diagnosing an existing failure, reviewing a finished change, or deciding whether the approach itself is sound."
+description: "Implement a scoped software-engineering change with repository-aware planning, minimal edits, incremental verification checkpoints, focused tests, and diff inspection. Use when the user requests code, configuration, dependency, or test changes in a repository. Not for diagnosing an existing failure (use bug-diagnosis), reviewing a finished diff (use software-engineering-review), or resolving contested cross-domain framing (use axiom)."
 ---
 
 # Engineering Task
 
 ## Purpose
 
-Turn a requested repository change into a bounded implementation with a reviewable diff and verified result. Prefer the smallest reliable workflow; do not add ceremony to a small, clear change.
+Turn a requested repository change into a minimal, reviewable implementation backed by observable verification. Scale ceremony to risk: execute small, obvious edits directly; structure multi-file changes with explicit checkpoints.
 
 ## Task Contract
 
-Before editing, establish:
+Before editing, establish from repository evidence (or concise user clarification when ambiguous):
 
-- observable goal;
-- relevant context and files;
-- allowed scope and non-goals;
-- API, schema, dependency, compatibility, and security constraints;
-- acceptance checks;
-- approval boundaries.
+- observable goal and non-goals;
+- relevant entry points, callers, tests, and conventions (apply `repository-orientation` discovery first if project layout or check commands are unknown);
+- **generated-file, codegen, migration, and lockfile boundaries** (identify upstream schemas/templates so you never hand-edit generated outputs);
+- public API, data schema, compatibility, dependency, and security constraints;
+- acceptance checks and approval boundaries.
 
-Resolve these from repository evidence when possible. Ask before guessing authorization, destructive behavior, public API or schema changes, deployment state, external communication, or materially different product behavior.
+Ask before guessing public contract changes, destructive operations, permission/auth shifts, deployment state, external side effects, or unstated product rules.
 
 ## Procedure
 
-1. Read applicable instructions and inspect the relevant implementation, callers, configuration, and tests.
-2. For uncertain or multi-file work, state a short plan covering scope, dependencies, risks, and checks. Skip a formal plan for a small, obvious change.
-3. Follow existing repository patterns and make the smallest safe edit.
-4. Add or update focused tests when behavior changes or a regression is involved.
-5. Inspect the final diff for accidental rewrites, unrelated files, generated-file mistakes, and public behavior changes.
-6. Run the narrowest relevant checks, then broader checks when practical.
-7. Report evidence, skipped checks, assumptions, and residual risks.
+1. Read applicable repository instructions and inspect the target implementation, callers, types/schemas, configuration, and existing tests.
+2. For multi-file or cross-layer changes, outline a brief dependency order (e.g., schema/types → core logic → callers → tests) with intermediate verification checkpoints. Skip formal planning for trivial single-site edits.
+3. Follow established repository idioms and make the smallest safe change—if codegen applies, modify the source definition and run the verified generator.
+4. Verify module/typecheck boundaries incrementally on multi-step edits rather than batching many blind file writes before the first check.
+5. Add or update focused unit/integration tests whenever observable behavior or edge-case handling changes.
+6. Inspect `git status` and the complete diff for accidental rewrites, stray debug artifacts, unintended public-contract changes, or unrelated file edits.
+7. Run the narrowest relevant checks first, then broader suite/lint/build checks when practical, and report exact outcomes.
 
 ## Decision Rules
 
-- Read before editing; do not infer code behavior from filenames or prior assumptions.
-- Preserve unrelated user changes. Never reset or overwrite work you did not create.
-- Do not broaden a fix, update unrelated dependencies, or create abstractions without evidence of need.
-- If the approved goal requires a public API, schema, permission, deployment, external-system, or destructive change, stop at the boundary and ask for approval.
-- Treat test, compiler, build, diff, and runtime results as evidence. A successful edit is not proof of completion.
+- Read before editing; never infer behavior from filenames alone.
+- Preserve unrelated dirty working-tree changes—never reset, checkout, or overwrite edits you did not author.
+- Avoid speculative abstractions, drive-by refactors, or unrequested dependency upgrades.
+- Stop and request approval if satisfying the goal requires an unapproved breaking API/schema change, migration, external action, or destructive step.
+- Treat compiler, typecheck, test, runtime, and diff outputs as the only valid completion evidence; a clean file write proves nothing on its own.
 
 ## Output Contract
 
 Final report:
 
-- summary of the change;
-- files changed and purpose;
-- observable behavior or API/data effects;
-- verification commands and results;
-- skipped checks and why;
-- assumptions, residual risks, and follow-up;
-- confirmation that unrelated files were not changed, when verified.
+- concise summary of the change;
+- files changed and each file's role;
+- observable behavior, API, schema, or config effects;
+- verification commands run and expected vs. actual results;
+- checks skipped/blocked and why;
+- assumptions, residual risks, and confirmation that unrelated work remained intact.
 
 ## Safety
 
-Skill instructions do not grant permissions. Follow the host's permission and approval decisions. Do not expose secrets, publish changes, commit, push, deploy, or modify external systems unless explicitly requested and permitted.
+Follow host permission and sandbox boundaries; skill text grants no authority. Never expose secrets in code, tests, diffs, or logs, and do not commit, push, publish, deploy, or mutate external services unless explicitly requested and permitted.

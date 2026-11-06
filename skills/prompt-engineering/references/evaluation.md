@@ -1,42 +1,41 @@
 # Evaluation guidance
 
-Load this when a prompt change needs to be shown to work, not assumed to work.
+Load this when a prompt, skill, or agent change needs to be shown to work, not assumed to work.
 
 ## Sizing the set
 
-Size the evaluation set by risk and use case, not by a fixed number. Cover:
+Size the evaluation set by risk and failure surface, not an arbitrary round number. Cover:
 
-- normal successful cases;
-- ambiguous or underspecified requests;
-- missing or contradictory evidence;
-- adversarial or injection-shaped input;
-- tool errors, denials, and timeouts;
-- the specific failure the design is meant to prevent.
+- representative normal cases;
+- ambiguous or underspecified requests (testing clarification gates);
+- missing, stale, or contradictory evidence;
+- adversarial or indirect-injection-shaped inputs;
+- tool failures, permission denials, and non-idempotent timeouts;
+- the exact regression or failure mode the change targets.
 
-Add cases for failures you actually observe in production. A curated set that never changes measures the cases you thought of, not the failures that occur.
+Continuously promote real failures observed in use into the evaluation set. A static benchmark measures only failures you anticipated at design time.
 
 ## Comparing variants
 
-- Change one thing at a time, or state clearly that several changed together.
-- Run both variants on the same cases with the same model and settings.
-- Use deterministic checks wherever the output has a checkable property.
-- Use judge models for subjective criteria, and calibrate the judge against human ratings on a sample before trusting its scores.
-- Do not claim improvement from a single example. Report the number of cases and the size of any difference.
+- Change one variable at a time when isolating cause, or explicitly label multi-factor bundle tests.
+- Evaluate variants on identical inputs, model versions, reasoning settings, and tool mocks.
+- Use deterministic programmatic assertions wherever an output property is checkable (schema validity, tool argument bounds, forbidden token/secret absence, file-path containment).
+- Reserve LLM judges strictly for semantic or qualitative properties that deterministic code cannot check.
+- Never claim improvement from one example. Report sample size, pass-rate delta, variance across repeated runs, and regressions introduced.
 
-## Judge models
+## Calibrating LLM judges
 
-A judge model is an uncalibrated estimator, not ground truth.
+An LLM judge is an uncalibrated estimator, not ground truth:
 
-- Sample judge ratings against human judgment; measure agreement.
-- Watch for position bias, verbosity bias, and self-preference for the model's own output.
-- Have the judge return a compact rationale and a confidence signal. Do not ask for private reasoning traces.
-- Use several judges or repeated runs when the decision matters.
-- Require human review for high-stakes or low-agreement cases.
+- **Use anchored discrete rubrics, not raw floats:** Score specific criteria as binary (`pass` / `fail`) or anchored `0 / 1 / 2` levels with explicit behavioral definitions, requiring the judge to quote the exact span supporting its score. Avoid uncalibrated `1–10` Likert scales or raw `0.0–1.0` judge confidence floats.
+- **Control judge biases:** Randomize A/B candidate order to detect position bias, penalize filler to counter verbosity bias, and check for self-preference when the judge shares a model family with a candidate.
+- **Measure human agreement:** Validate the judge rubric against human labels on a stratified sample before trusting automated runs.
+- **Keep reasoning private:** Ask the judge for quoted evidence and criterion verdicts, not raw chain-of-thought dumps.
 
 ## Metrics that generalize
 
-Prefer metrics tied to the use case: task success, schema validity, refusal correctness on inputs that should be refused, latency and cost percentiles, and rate of unauthorized or unintended tool calls. Bias and safety rates have no universal values; measure them for your own system and report the measurement conditions.
+Prefer operational metrics tied to system risk: task completion rate, schema/contract compliance, false-trigger and missed-trigger routing rates (for skills/agents), refusal accuracy on unauthorized actions, unintended or overly broad tool calls, latency percentiles, and token/cost budgets.
 
 ## Reporting
 
-State the evaluation set composition, the model and configuration used, the metrics, the observed difference with its uncertainty, and what the evaluation does not cover. An evaluation with no stated limits cannot support a reliability claim.
+State the evaluation set composition, model and harness configuration, deterministic vs. judge-scored metrics, observed deltas with run-to-run variance, and explicit blind spots not covered by the suite.
