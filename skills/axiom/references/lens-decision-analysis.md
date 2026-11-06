@@ -12,4 +12,4 @@ Use when choosing among competing architectures, strategies, or designs with rea
 
 ## Reporting Economy
 
-Lead with the recommended option (or why the choice remains tied on a value weight), the dominating tradeoff, and the concrete condition that would flip the decision. Use a comparison table only when $>2$ options compete across multiple axes.
+Lead with the recommended option (or why the choice remains tied on a value weight), the dominating tradeoff, and the concrete condition that would flip the decision. Use a comparison table only when >2 options compete across multiple axes.

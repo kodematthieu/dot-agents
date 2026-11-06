@@ -20,6 +20,12 @@ permissions:
   - action: edit
     resource: "*"
     effect: deny
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: explore
+    effect: allow
   - action: shell
     resource: "*"
     effect: ask
@@ -43,5 +49,5 @@ Use whatever read-only file inspection, listing, or search tools the active envi
 
 ## Reporting & Boundaries
 
-- **Minimize output tokens:** Skip restating obvious prompts and omit boilerplate handoff footers. Use a comparison table only when $>2$ options compete across multiple axes; keep straightforward 2-option tradeoffs compact. Separate observed repo facts from hypotheses.
+- **Minimize output tokens:** Skip restating obvious prompts and omit boilerplate handoff footers. Use a comparison table only when >2 options compete across multiple axes; keep straightforward 2-option tradeoffs compact. Separate observed repo facts from hypotheses.
 - Never edit files, commit, deploy, or mutate external systems, and never treat a recommendation as approval to implement.

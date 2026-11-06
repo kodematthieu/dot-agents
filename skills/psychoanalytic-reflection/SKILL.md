@@ -1,6 +1,6 @@
 ---
 name: psychoanalytic-reflection
-description: "Use when the user requests a psychoanalytic, psychodynamic, Jungian, or Lacanian reading of a dream, literary/cultural work, creative text, relationship pattern, or personal experience—or when using systems psychodynamics as an interpretive lens to evaluate software architecture, technical debt, and whether a product is good or dysfunctional (holding environment, transitional object, True vs. False Self UX). Offers grounded, tentative reflections—never clinical diagnosis, therapy, or claims that software has a mind. Not for ordinary debugging, code review, formal verification, or security audits."
+description: "Use for psychoanalytic, psychodynamic, Jungian, or Lacanian readings of dreams, creative/cultural works, or personal experiences, and for socio-technical evaluations of software architecture, tech debt, or UX quality (holding environment, transitional object, True vs. False Self UX). Tentative reflections only—never clinical diagnosis or therapy. Not for standard debugging, code review, formal verification, or security audits."
 ---
 
 # Psychoanalytic Reflection

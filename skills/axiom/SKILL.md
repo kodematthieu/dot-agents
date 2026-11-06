@@ -1,6 +1,6 @@
 ---
 name: axiom
-description: "Use when a problem cuts across domains or rests on contested premises—evaluating an argument, architecture, or proposal; choosing among options with real tradeoffs; defining a domain ontology; specifying formal safety/liveness properties; or diagnosing systemic failure loops. Applies first-principles, systems, and formal lenses when they fit. Not for executing a bounded repository edit (use engineering-task), repairing a specific software bug (use bug-diagnosis), reviewing a code diff (use software-engineering-review), or auditing AI injection/secret boundaries (use prompt-security-review)."
+description: "Use for cross-domain problems or contested premises: evaluating arguments, architectures, or proposals; comparing options with real tradeoffs; modeling domain ontologies; specifying formal safety/liveness properties; or diagnosing systemic failure loops. Not for bounded repository edits (use engineering-task), bug repair (use bug-diagnosis), code diff review (use software-engineering-review), or AI injection/secret audits (use prompt-security-review)."
 ---
 
 # Axiom

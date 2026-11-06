@@ -18,7 +18,7 @@ Skill and subagent `description` fields are loaded into the catalog on every tur
 
 ## 3. Model- & Environment-Agnostic Instruction Design
 
-- **Calm, observable directives:** Avoid aggressive all-caps imperatives (`CRITICAL`, `MANDATORY`, `YOU MUST ALWAYS`), which cause reasoning-heavy models to over-trigger while adding zero precision for non-thinking models.
+- **Calm, observable directives:** Prefer direct behavioral rules over habitual all-caps imperatives (`CRITICAL`, `MANDATORY`, `YOU MUST ALWAYS`); vendor prompting guides report that some reasoning-tuned models can over-trigger on aggressive phrasing, and calm specifications generalize more cleanly across model families.
 - **Positive contracts over negation walls:** Pair boundaries with the affirmative behavior to use instead (e.g., *State decision-reversal conditions rather than numeric confidence floats*).
 - **Context ordering:** Place reference schemas, diffs, or retrieved documents *before* active task criteria to improve long-context attention across model families.
 - **Environment neutrality:** Never hardcode OS names, shell dialects, VCS tools, or host-specific tool IDs inside shared skill or agent prose; refer to capabilities generically (*read-only search tools*, *VCS diff/status*, *active host session*).

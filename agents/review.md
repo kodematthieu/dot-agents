@@ -14,9 +14,6 @@ permissions:
   - action: subagent
     resource: explore
     effect: allow
-  - action: subagent
-    resource: research
-    effect: allow
   - action: shell
     resource: "*"
     effect: ask
