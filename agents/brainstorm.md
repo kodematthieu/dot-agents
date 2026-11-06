@@ -3,7 +3,7 @@ name: brainstorm
 description: Generate and compare well-scoped options for a product, architecture, prompt, workflow, or implementation decision before committing to a plan.
 mode: primary
 mainAgent: true
-subagent: true
+subagent: false
 permissions:
   - action: read
     resource: "*"

@@ -2,6 +2,7 @@
 name: review
 description: Review code changes and run relevant tests without modifying files.
 mode: subagent
+mainAgent: false
 subagent: true
 permissions:
   - action: edit
