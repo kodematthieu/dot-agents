@@ -24,7 +24,7 @@ Stop for explicit approval before changing public APIs/schemas, permissions, dep
 3. Follow existing repository idioms and make the smallest safe edit, running codegen when upstream schemas change.
 4. Verify compile/typecheck boundaries incrementally across multi-step edits rather than batching many blind writes.
 5. Add or update focused tests when observable behavior or edge cases change.
-6. Inspect `git status` and diff to preserve unrelated dirty work and catch stray artifacts or unintended contract changes.
+6. Inspect VCS status and diff (or modified files) to preserve unrelated dirty work and catch stray artifacts or unintended contract changes.
 7. Run the narrowest relevant checks, then broader checks when practical.
 
 ## Reporting & Safety

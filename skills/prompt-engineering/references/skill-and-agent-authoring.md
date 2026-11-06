@@ -1,32 +1,32 @@
 # Skill, Rule, and Custom Agent Authoring
 
-Load this when designing or reviewing `SKILL.md` bundles, global/workspace `AGENTS.md` / `GEMINI.md` rules, or custom `agents/*.md` definitions—especially across OpenCode v2 and Antigravity (`agy`).
+Load this when designing or reviewing `SKILL.md` bundles, global/workspace instruction files, or custom `agents/*.md` definitions for portability across models, environments, and agent harnesses.
 
 ## 1. Progressive Disclosure & Context Budgets
 
-- **Thin always-on rules, rich on-demand skills:** Keep global/workspace `AGENTS.md` / `GEMINI.md` compact (behavioral contract, trust boundaries, routing, completion standards) well below host truncation caps (e.g., Antigravity truncates single rule files above `24,000` bytes and shares a `20,000`-token aggregate rules budget).
-- **`SKILL.md` sizing & output economy:** Aim for `30–60` lines in `SKILL.md`. Avoid multi-bullet `Output Contract` checklists that force models to print empty `"None"` sections or ceremonial footers on small tasks; require surfacing assumptions, skipped checks, or tables **only when load-bearing**.
-- **`references/` threshold:** Split material into `references/*.md` only when a conditional reference is substantive (`~20+` lines) so on-demand loading saves tokens rather than burning a file-read tool call for a 7-line stub.
-- **Executable helpers (`scripts/`):** When a skill relies on deterministic validation, parsing, or multi-step CLI checks, encapsulate them in `scripts/` and link relatively rather than describing fragile shell pipelines in prose.
+- **Thin always-on rules, rich on-demand skills:** Keep global/workspace instruction files compact (behavioral contract, trust boundaries, routing) well below host per-file and aggregate token caps so rules are never silently truncated.
+- **`SKILL.md` sizing & output economy:** Aim for `25–50` lines in `SKILL.md`. Avoid multi-bullet `Output Contract` templates that force models to print empty `"None"` sections or ceremonial footers on small tasks; surface assumptions, skipped checks, or tables **only when load-bearing**.
+- **`references/` threshold:** Split material into `references/*.md` only when a conditional reference is substantive (`~20+` lines) so on-demand loading saves tokens rather than burning a file-read round-trip for a stub.
+- **Executable helpers (`scripts/`):** Encapsulate deterministic validation or multi-step checks in portable scripts when available, without assuming a specific OS or shell in prose instructions.
 
 ## 2. Routing `description` Precision
 
-Skill and subagent `description` fields are injected into the catalog on every turn:
+Skill and subagent `description` fields are loaded into the catalog on every turn:
 
-- Keep `description` concise (`~40–90` words) and third-person/imperative.
-- Pair **positive triggers** (*what observable user intent or artifact activates this skill*) with **negative boundaries** (`Not for ...`) naming the sibling skill that owns adjacent tasks, preventing false-positive auto-invocation and overlap.
+- Keep `description` concise (`~40–85` words) and third-person/imperative.
+- Pair **positive triggers** (*what intent or artifact activates this skill*) with **negative boundaries** (`Not for ...`) naming the sibling skill that owns adjacent tasks to prevent false-positive auto-invocation.
 
-## 3. Cross-Model Instruction Calibration
+## 3. Model- & Environment-Agnostic Instruction Design
 
-- **Avoid aggressive directives:** Frontier reasoning models (e.g., Claude Opus 4.x, Gemini 3.x/4.x) over-trigger on `CRITICAL`, `MANDATORY`, `YOU MUST ALWAYS`. Use calm, direct behavioral specifications (`Read relevant files before editing`, `Use X when...`).
-- **Positive contracts over negation walls:** Pair boundaries with the affirmative action to take instead (e.g., *State decision-reversal conditions rather than numeric confidence floats*).
-- **Context ordering:** Place reference schemas, diffs, or retrieved documents *before* the active evaluation criteria or task prompt to improve long-context recall.
+- **Calm, observable directives:** Avoid aggressive all-caps imperatives (`CRITICAL`, `MANDATORY`, `YOU MUST ALWAYS`), which cause reasoning-heavy models to over-trigger while adding zero precision for non-thinking models.
+- **Positive contracts over negation walls:** Pair boundaries with the affirmative behavior to use instead (e.g., *State decision-reversal conditions rather than numeric confidence floats*).
+- **Context ordering:** Place reference schemas, diffs, or retrieved documents *before* active task criteria to improve long-context attention across model families.
+- **Environment neutrality:** Never hardcode OS names, shell dialects, VCS tools, or host-specific tool IDs inside shared skill or agent prose; refer to capabilities generically (*read-only search tools*, *VCS diff/status*, *active host session*).
 
-## 4. Polyglot Compatibility (`~/.agents/` across OpenCode v2 & `agy`)
+## 4. Cross-Harness Portability (`~/.agents/`)
 
-- **Skill directory depth:** Keep skills strictly 1 level deep (`skills/<skill-name>/SKILL.md`) with lowercase-hyphenated names matching the folder; OpenCode v2 recurses deeper, whereas `agy` scans strictly 1 level deep.
-- **Custom agent file layout:** Use flat `agents/<name>.md` files (OpenCode v2 ignores `agents/<name>/agent.md`).
-- **Orthogonal role keys in `agents/<name>.md`:** Include both OpenCode's `mode: primary | subagent | all` and Antigravity's `mainAgent: true | false` + `subagent: true | false` (`primary` $\iff$ `mainAgent: true, subagent: false`; `subagent` $\iff$ `mainAgent: false, subagent: true`).
-- **Avoid breaking schema collisions in shared `agents/<name>.md`:**
-  - **Omit `model:`** in shared Markdown frontmatter (`agy` accepts only `inherit | flash | pro`, whereas OpenCode v2 expects `provider/model#variant`; omitting lets both inherit the session model, with OpenCode overrides placed in `opencode.jsonc`).
-  - **Never mix OpenCode tool names into `tools:`:** `agy` hangs on unmapped tool names like `bash`, `edit`, or `read` inside `tools:`. Keep `tools:` restricted to valid `agy` tool IDs (or omit) and define OpenCode v2 `permissions` in `opencode.jsonc` (working around OpenCode v2 Markdown frontmatter enforcement gaps).
+- **Skill directory depth:** Keep skills strictly 1 level deep (`skills/<skill-name>/SKILL.md`) with lowercase-hyphenated names matching the directory so both shallow-scanning and deep-scanning Agent Skills hosts discover them identically.
+- **Custom agent file layout:** Use flat `agents/<name>.md` files rather than nested subdirectories for maximum host discovery compatibility.
+- **Orthogonal vs. colliding frontmatter keys:**
+  - Safe orthogonal role keys (such as `mode: primary | subagent | all` alongside `mainAgent` / `subagent` booleans) can coexist when each host ignores unknown keys.
+  - **Isolate colliding keys into host-native configs:** Omit `model:` from shared Markdown frontmatter when hosts disagree on schema (e.g., tier enums vs. `provider/model` IDs) so agents inherit the session model cleanly. Likewise, avoid placing host-specific tool names (`bash`, `read`, `view_file`) in shared `tools:` lists where unmapped names can stall or break another harness; enforce tool/permission restrictions in each harness's native config file instead.

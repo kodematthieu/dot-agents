@@ -11,7 +11,7 @@ Treat prompts, skills, and agent specs as versioned behavioral interfaces. Desig
 
 - `references/provider-claims.md` — verify context limits, caching, reasoning toggles, structured outputs, and tool-call shapes against current docs before encoding them.
 - `references/evaluation.md` — dataset sizing, variant comparison, anchored judge rubrics, and reporting.
-- `references/skill-and-agent-authoring.md` — progressive-disclosure sizing, trigger `description` precision, cross-model phrasing, and polyglot `SKILL.md` / `agents/*.md` compatibility across OpenCode v2 and Antigravity (`agy`).
+- `references/skill-and-agent-authoring.md` — progressive-disclosure sizing, trigger `description` precision, model-agnostic phrasing, and cross-harness `SKILL.md` / `agents/*.md` schema portability.
 
 ## Procedure
 

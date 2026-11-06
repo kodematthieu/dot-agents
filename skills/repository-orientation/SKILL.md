@@ -9,11 +9,11 @@ Build an accurate, token-efficient map of an unfamiliar codebase before planning
 
 ## Procedure
 
-1. Inspect root layout, `git status`, `README`s, manifests, lockfiles, and task runners (`Makefile`, `Justfile`, `flake.nix`, `package.json`, `Cargo.toml`, `pyproject.toml`, `go.mod`).
-2. Locate active instructions: `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.agents/` (`rules/`, `workflows/`, `skills/`), `.opencode/`, `.pi/`, and `CONTRIBUTING.md`.
-3. Check `.github/workflows/` or CI configs as ground truth for verified build, lint, typecheck, codegen, and test commands.
+1. Inspect root layout, VCS status, `README`s, manifests, lockfiles, and build/task definitions.
+2. Locate active project and agent instruction files (`AGENTS.md`, `.agents/`, `CONTRIBUTING.md`, or host-specific rule files present in the repo).
+3. Check CI/CD pipeline configs as ground truth for verified build, lint, typecheck, codegen, and test commands.
 4. Distinguish source, test, config, migration, generated, vendored, and legacy paths.
-5. Bound searches in large repos/monorepos: exclude `node_modules/`, `dist/`, `build/`, `target/`, `vendor/`, `.git/`, and lockfiles; read focused line ranges around entry points, callers, and nearest tests rather than whole files.
+5. Bound searches in large repos/monorepos: exclude dependency, build-output, vendored, VCS-metadata, and lockfile paths; read focused line ranges around entry points, callers, and nearest tests rather than whole files.
 6. Separate observed facts from hypotheses; do not invent commands or propose broad refactors during orientation.
 
 ## Reporting & Safety

@@ -27,8 +27,8 @@ Tool definitions themselves sit inside the model's trusted context window:
 
 ## 5. Multi-agent & subagent confused-deputy escalation
 
-- **Cross-agent laundering:** A low-privilege read-only subagent (`explore`, `research`) ingests untrusted repo/web content and returns a poisoned summary that persuades a higher-privilege parent orchestrator to run shell commands or edit files.
-- **Transitive delegation:** An agent bypassing its own `edit: deny` or `shell: deny` rule by spawning a sibling/child subagent whose permissions are broader.
+- **Cross-agent laundering:** A low-privilege read-only discovery subagent ingests untrusted workspace/web content and returns a poisoned summary that persuades a higher-privilege parent orchestrator to run commands or edit files.
+- **Transitive delegation:** An agent bypassing its own edit or command restrictions by spawning a sibling/child subagent with broader permissions.
 
 ## 6. Secret exposure & exfiltration
 
@@ -50,12 +50,12 @@ Tool definitions themselves sit inside the model's trusted context window:
 
 ## 9. Persistent state & supply-chain poisoning
 
-- **Cross-session persistence:** Indirect injection modifying `AGENTS.md`, `GEMINI.md`, `.agents/rules/`, `SKILL.md`, Knowledge Items, memory stores, `.git/hooks/`, or CI workflows so compromise survives into future sessions.
-- **Skill/plugin supply chain:** Unreviewed third-party skills, unpinned npm/pip/MCP packages (`@latest`), scripts executed automatically during orientation/review, or remote HTTP skill catalogs refreshed without verifying `index.json`, safe relative paths, and version pinning.
+- **Cross-session persistence:** Indirect injection modifying persistent instruction/rule files (`AGENTS.md`, `.agents/`, `SKILL.md`), agent memory/knowledge stores, VCS hooks, or CI workflows so compromise survives into future sessions.
+- **Skill/plugin supply chain:** Unreviewed third-party skills, unpinned package/MCP dependencies (`@latest`), scripts executed automatically during orientation/review, or remote skill catalogs refreshed without verifying manifest integrity, safe relative paths, and version pinning.
 
 ## Remediation Split
 
 For every finding, distinguish:
 
 1. **Advisory prompt hardening** (clear trust labeling, narrow role scope, explicit refusal cues); and
-2. **Enforced runtime boundary** (sandbox isolation, host `permissions` in `opencode.jsonc` / `agy` policy, path containment, schema allowlists, pinned hashes, and human approval gates).
+2. **Enforced runtime boundary** (sandbox isolation, host permission policies, path containment, schema allowlists, pinned digests, and human approval gates).
