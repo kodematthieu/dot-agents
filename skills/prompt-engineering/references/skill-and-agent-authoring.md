@@ -5,7 +5,7 @@ Load this when designing or reviewing `SKILL.md` bundles, global/workspace `AGEN
 ## 1. Progressive Disclosure & Context Budgets
 
 - **Thin always-on rules, rich on-demand skills:** Keep global/workspace `AGENTS.md` / `GEMINI.md` compact (behavioral contract, trust boundaries, routing, completion standards) well below host truncation caps (e.g., Antigravity truncates single rule files above `24,000` bytes and shares a `20,000`-token aggregate rules budget).
-- **`SKILL.md` sizing:** Aim for `40–90` lines in `SKILL.md` covering core procedure, decision rules, output contract, and domain-specific hazards.
+- **`SKILL.md` sizing & output economy:** Aim for `30–60` lines in `SKILL.md`. Avoid multi-bullet `Output Contract` checklists that force models to print empty `"None"` sections or ceremonial footers on small tasks; require surfacing assumptions, skipped checks, or tables **only when load-bearing**.
 - **`references/` threshold:** Split material into `references/*.md` only when a conditional reference is substantive (`~20+` lines) so on-demand loading saves tokens rather than burning a file-read tool call for a 7-line stub.
 - **Executable helpers (`scripts/`):** When a skill relies on deterministic validation, parsing, or multi-step CLI checks, encapsulate them in `scripts/` and link relatively rather than describing fragile shell pipelines in prose.
 

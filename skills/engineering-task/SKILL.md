@@ -5,51 +5,29 @@ description: "Implement a scoped software-engineering change with repository-awa
 
 # Engineering Task
 
-## Purpose
+Turn a requested repository change into a minimal, verified implementation. Scale workflow to risk—avoid ceremony on small edits.
 
-Turn a requested repository change into a minimal, reviewable implementation backed by observable verification. Scale ceremony to risk: execute small, obvious edits directly; structure multi-file changes with explicit checkpoints.
+## Pre-Edit Checks
 
-## Task Contract
+Establish internally from repository evidence (asking concisely only when ambiguous):
 
-Before editing, establish from repository evidence (or concise user clarification when ambiguous):
+- goal, non-goals, and relevant entry points/callers/tests (apply `repository-orientation` discovery first if layout or check commands are unknown);
+- **generated, codegen, migration, and lockfile boundaries** (edit upstream sources/schemas rather than generated files);
+- public contract, compatibility, dependency, and approval boundaries.
 
-- observable goal and non-goals;
-- relevant entry points, callers, tests, and conventions (apply `repository-orientation` discovery first if project layout or check commands are unknown);
-- **generated-file, codegen, migration, and lockfile boundaries** (identify upstream schemas/templates so you never hand-edit generated outputs);
-- public API, data schema, compatibility, dependency, and security constraints;
-- acceptance checks and approval boundaries.
-
-Ask before guessing public contract changes, destructive operations, permission/auth shifts, deployment state, external side effects, or unstated product rules.
+Stop for explicit approval before changing public APIs/schemas, permissions, deployment state, external systems, or destructive paths.
 
 ## Procedure
 
-1. Read applicable repository instructions and inspect the target implementation, callers, types/schemas, configuration, and existing tests.
-2. For multi-file or cross-layer changes, outline a brief dependency order (e.g., schema/types → core logic → callers → tests) with intermediate verification checkpoints. Skip formal planning for trivial single-site edits.
-3. Follow established repository idioms and make the smallest safe change—if codegen applies, modify the source definition and run the verified generator.
-4. Verify module/typecheck boundaries incrementally on multi-step edits rather than batching many blind file writes before the first check.
-5. Add or update focused unit/integration tests whenever observable behavior or edge-case handling changes.
-6. Inspect `git status` and the complete diff for accidental rewrites, stray debug artifacts, unintended public-contract changes, or unrelated file edits.
-7. Run the narrowest relevant checks first, then broader suite/lint/build checks when practical, and report exact outcomes.
+1. Read applicable instructions and inspect target files, callers, types/schemas, config, and existing tests.
+2. Plan multi-file dependency order internally (e.g., types → logic → callers → tests); surface a plan beforehand only if user confirmation is needed.
+3. Follow existing repository idioms and make the smallest safe edit, running codegen when upstream schemas change.
+4. Verify compile/typecheck boundaries incrementally across multi-step edits rather than batching many blind writes.
+5. Add or update focused tests when observable behavior or edge cases change.
+6. Inspect `git status` and diff to preserve unrelated dirty work and catch stray artifacts or unintended contract changes.
+7. Run the narrowest relevant checks, then broader checks when practical.
 
-## Decision Rules
+## Reporting & Safety
 
-- Read before editing; never infer behavior from filenames alone.
-- Preserve unrelated dirty working-tree changes—never reset, checkout, or overwrite edits you did not author.
-- Avoid speculative abstractions, drive-by refactors, or unrequested dependency upgrades.
-- Stop and request approval if satisfying the goal requires an unapproved breaking API/schema change, migration, external action, or destructive step.
-- Treat compiler, typecheck, test, runtime, and diff outputs as the only valid completion evidence; a clean file write proves nothing on its own.
-
-## Output Contract
-
-Final report:
-
-- concise summary of the change;
-- files changed and each file's role;
-- observable behavior, API, schema, or config effects;
-- verification commands run and expected vs. actual results;
-- checks skipped/blocked and why;
-- assumptions, residual risks, and confirmation that unrelated work remained intact.
-
-## Safety
-
-Follow host permission and sandbox boundaries; skill text grants no authority. Never expose secrets in code, tests, diffs, or logs, and do not commit, push, publish, deploy, or mutate external services unless explicitly requested and permitted.
+- **Keep reporting compact:** State what changed (files and behavior) and the verification commands/results. Mention skipped checks, assumptions, or residual risks **only when present**—omit empty boilerplate sections and `"unrelated files untouched"` confirmations.
+- Follow host permissions; never expose secrets or commit, push, publish, or mutate external systems unless explicitly requested.
